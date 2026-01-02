@@ -1,0 +1,413 @@
+:root {
+    --color-fondo: #f4f6fb;
+    --color-panel: #ffffff;
+    --color-texto: #1f2933;
+    --color-primario: #2563eb;
+    --color-secundario: #6b7280;
+    --color-secundario-intenso: #374151;
+    --color-peligro: #c53030;
+    --color-borde: #e2e8f0;
+    --color-resaltado: #eef2ff;
+    --color-resaltado-suave: #fafbff;
+    --color-boton-resaltado: #dbeafe;
+    --color-sombra: rgba(15, 23, 42, 0.15);
+    --color-sombra-primaria: rgba(37, 99, 235, 0.35);
+    --color-overlay: rgba(15, 23, 42, 0.45);
+    --color-error-fondo: #fee2e2;
+    --color-blanco: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+a {
+    color: inherit;
+}
+
+.pagina-productos {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.pagina-productos__contenedor {
+    width: 100%;
+    max-width: 960px;
+    background: var(--color-panel);
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid var(--color-borde);
+    box-shadow: 0 20px 45px var(--color-sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.encabezado-productos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.encabezado-productos__titulo {
+    margin: 0;
+}
+
+.encabezado-productos__acciones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.boton {
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    color: var(--color-texto);
+}
+
+.boton:focus-visible,
+.enlace-accion:focus-visible {
+    outline: 3px solid var(--color-primario);
+    outline-offset: 2px;
+}
+
+.boton--primario {
+    background: var(--color-primario);
+    color: var(--color-blanco);
+    box-shadow: 0 10px 20px var(--color-sombra-primaria);
+}
+
+.boton--secundario {
+    background: var(--color-resaltado);
+    color: var(--color-primario);
+}
+
+.boton--texto {
+    background: transparent;
+    color: var(--color-secundario);
+    padding: 0;
+}
+
+.boton--icono {
+    background: var(--color-boton-resaltado);
+    color: var(--color-secundario-intenso);
+}
+
+.boton__icono {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-panel);
+}
+
+.boton:hover {
+    transform: translateY(-1px);
+}
+
+.tabla-productos__tabla {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--color-borde);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.tabla-productos__encabezado th {
+    background: var(--color-resaltado);
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+}
+
+.tabla-productos__fila td {
+    padding: 12px 16px;
+    border-top: 1px solid var(--color-borde);
+}
+
+.tabla-productos__fila:nth-child(even) {
+    background: var(--color-resaltado-suave);
+}
+
+.tabla-productos__acciones {
+    width: 120px;
+    text-align: center;
+}
+
+.enlace-accion {
+    color: var(--color-primario);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.enlace-accion--peligro {
+    color: var(--color-peligro);
+}
+
+.acciones-pagina {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.modal-producto {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-producto__fondo {
+    position: absolute;
+    inset: 0;
+    background: var(--color-overlay);
+}
+
+.modal-producto__contenedor {
+    position: relative;
+    background: var(--color-panel);
+    padding: 32px;
+    border-radius: 16px;
+    width: min(420px, 90vw);
+    border: 1px solid var(--color-borde);
+    box-shadow: 0 25px 55px var(--color-sombra);
+}
+
+.modal-producto__titulo {
+    margin-top: 0;
+}
+
+.formulario-producto {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formulario-producto__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-weight: 600;
+}
+
+.formulario-producto__input {
+    border: 1px solid var(--color-borde);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    background: var(--color-blanco);
+}
+
+.formulario-producto__acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.mensaje-error {
+    background: var(--color-error-fondo);
+    color: var(--color-peligro);
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 0 0 8px;
+}
+
+.pagina-autenticacion {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background: linear-gradient(135deg, var(--color-resaltado), var(--color-fondo));
+    position: relative;
+}
+
+.tarjeta-acceso {
+    width: min(420px, 100%);
+    background: var(--color-panel);
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid var(--color-borde);
+    box-shadow: 0 30px 60px var(--color-sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+}
+
+.tarjeta-acceso__icono {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: var(--color-resaltado);
+    color: var(--color-primario);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjeta-acceso__titulo {
+    margin: 0;
+}
+
+.tarjeta-acceso__descripcion {
+    margin: 0;
+    color: var(--color-secundario);
+}
+
+.tarjeta-acceso__enlace {
+    margin: 0;
+    color: var(--color-secundario);
+}
+
+.formulario-acceso {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formulario-acceso__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.formulario-acceso__etiqueta {
+    font-weight: 600;
+}
+
+.formulario-acceso__input {
+    border: 1px solid var(--color-borde);
+    border-radius: 999px;
+    padding: 12px 18px;
+    background: var(--color-blanco);
+    font-size: 1rem;
+}
+
+.formulario-acceso__acciones {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagina-autenticacion__footer {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9rem;
+    color: var(--color-secundario-intenso);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid var(--color-borde);
+    box-shadow: 0 18px 35px var(--color-sombra);
+    text-align: center;
+}
+
+.pagina-dashboard {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+}
+
+.panel-dashboard {
+    width: min(900px, 100%);
+    background: var(--color-panel);
+    border-radius: 24px;
+    padding: 36px;
+    border: 1px solid var(--color-borde);
+    box-shadow: 0 30px 60px var(--color-sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.panel-dashboard__encabezado {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 20px;
+    align-items: center;
+}
+
+.panel-dashboard__icono {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: var(--color-resaltado);
+    color: var(--color-primario);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-dashboard__etiqueta {
+    margin: 0;
+    color: var(--color-secundario);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+}
+
+.panel-dashboard__titulo {
+    margin: 4px 0 8px;
+}
+
+.panel-dashboard__descripcion {
+    margin: 0;
+    color: var(--color-secundario);
+}
+
+.panel-dashboard__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .encabezado-productos {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tabla-productos__acciones {
+        width: auto;
+    }
+
+    .panel-dashboard__encabezado {
+        grid-template-columns: 1fr;
+    }
+
+    .panel-dashboard__icono {
+        justify-self: flex-start;
+    }
+}
